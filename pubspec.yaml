@@ -37,7 +37,7 @@ dependencies:
   cached_network_image: ^3.3.0
 
   # Notifications (optional for MVP)
-  flutter_local_notifications: ^16.1.0
+  flutter_local_notifications: ^17.0.0
 
 dev_dependencies:
   flutter_test:
@@ -58,3 +58,8 @@ flutter:
         - asset: fonts/Roboto-Regular.ttf
         - asset: fonts/Roboto-Bold.ttf
           weight: 700
+
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/icons/icon.png"

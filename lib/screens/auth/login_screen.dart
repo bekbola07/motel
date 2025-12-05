@@ -37,22 +37,13 @@ class _LoginScreenState extends State<LoginScreen> {
     final Map<String, dynamic> result;
     User? user;
 
-    if (email.contains('admin')) {
-      user = User(id: 'admin-id', email: email, role: UserRole.ADMIN, passwordHash: '', createdAt: DateTime.now(), updatedAt: DateTime.now());
-      result = {'success': true, 'user': user};
-    } else if (email.contains('staff')) {
-      user = User(id: 'staff-id', email: email, role: UserRole.STAFF, passwordHash: '', createdAt: DateTime.now(), updatedAt: DateTime.now());
-      result = {'success': true, 'user': user};
-    } else {
-      // For students, we need to get the linked ID from the database
-      // This is still a partial simulation, assuming the student exists
-      final studentUser = await AuthService.instance.login(email, password);
-      if(studentUser['success']){
-        user = studentUser['user'];
+    // Use direct authentication for all roles via AuthService
+    final authResult = await AuthService.instance.login(email, password);
+    if (authResult['success']) {
+        user = authResult['user'];
         result = {'success': true, 'user': user!};
-      } else {
-        result = studentUser;
-      }
+    } else {
+        result = authResult;
     }
 
     if (user != null) {
@@ -80,7 +71,7 @@ class _LoginScreenState extends State<LoginScreen> {
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text(result['message'] ?? 'Login failed'),
+          content: Text(result['message'] ?? 'Kirishda xatolik'),
           backgroundColor: Colors.red,
         ),
       );
@@ -100,13 +91,13 @@ class _LoginScreenState extends State<LoginScreen> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   const Text(
-                    'Welcome Back',
+                    'Xush kelibsiz',
                     textAlign: TextAlign.center,
                     style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
                   ),
                   const SizedBox(height: 8),
                   Text(
-                    'Sign in to continue',
+                    'Davom etish uchun tizimga kiring',
                     textAlign: TextAlign.center,
                     style: TextStyle(color: Colors.grey[600]),
                   ),
@@ -114,9 +105,9 @@ class _LoginScreenState extends State<LoginScreen> {
                   TextFormField(
                     controller: _emailController,
                     keyboardType: TextInputType.emailAddress,
-                    decoration: const InputDecoration(labelText: 'Email', prefixIcon: Icon(Icons.email)),
+                    decoration: const InputDecoration(labelText: 'Login', prefixIcon: Icon(Icons.person)),
                     validator: (value) {
-                      if (value == null || value.isEmpty) return 'Please enter your email';
+                      if (value == null || value.isEmpty) return 'Iltimos, loginingizni kiriting';
                       return null;
                     },
                   ),
@@ -125,7 +116,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     controller: _passwordController,
                     obscureText: _obscurePassword,
                     decoration: InputDecoration(
-                      labelText: 'Password',
+                      labelText: 'Parol',
                       prefixIcon: const Icon(Icons.lock),
                       suffixIcon: IconButton(
                         icon: Icon(_obscurePassword ? Icons.visibility : Icons.visibility_off),
@@ -133,7 +124,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                     ),
                     validator: (value) {
-                      if (value == null || value.isEmpty) return 'Please enter your password';
+                      if (value == null || value.isEmpty) return 'Iltimos, parolingizni kiriting';
                       return null;
                     },
                   ),
@@ -143,12 +134,12 @@ class _LoginScreenState extends State<LoginScreen> {
                     style: ElevatedButton.styleFrom(padding: const EdgeInsets.symmetric(vertical: 16)),
                     child: _isLoading
                         ? const SizedBox(height: 20, width: 20, child: CircularProgressIndicator(strokeWidth: 2))
-                        : const Text('Login', style: TextStyle(fontSize: 16)),
+                        : const Text('Kirish', style: TextStyle(fontSize: 16)),
                   ),
                   const SizedBox(height: 16),
                   TextButton(
                     onPressed: () => Navigator.of(context).pushNamed('/register'),
-                    child: const Text('Don\'t have an account? Register'),
+                    child: const Text('Hisobingiz yo\'qmi? Ro\'yxatdan o\'tish'),
                   ),
                 ],
               ),

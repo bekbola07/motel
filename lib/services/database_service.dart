@@ -10,7 +10,7 @@ import '../models/models.dart';
 class DatabaseService {
   static final DatabaseService instance = DatabaseService._init();
   static Database? _database;
-  static const _dbVersion = 5; // Incremented for bed spaces
+  static const _dbVersion = 6; // Incremented to force database recreation
 
   DatabaseService._init();
 
@@ -144,7 +144,7 @@ class DatabaseService {
     // Users
     batch.insert('users', {
       'id': 'admin-001',
-      'email': 'admin@dorm.edu',
+      'email': 'admin',
       'password_hash': _hashPassword('admin123'),
       'role': 'ADMIN',
       'created_at': DateTime.now().toIso8601String(),
@@ -152,7 +152,7 @@ class DatabaseService {
     });
     batch.insert('users', {
       'id': 'staff-001',
-      'email': 'staff@dorm.edu',
+      'email': 'staff',
       'password_hash': _hashPassword('staff123'),
       'role': 'STAFF',
       'created_at': DateTime.now().toIso8601String(),
@@ -163,15 +163,15 @@ class DatabaseService {
       'id': studentId,
       'full_name': 'Bekbola',
       'student_id': '2024001',
-      'faculty': 'Computer Science',
-      'course': 'Year 2',
-      'email': 'student@dorm.edu',
+      'faculty': 'Kompyuter fanlari',
+      'course': '2-kurs',
+      'email': 'student',
       'created_at': DateTime.now().toIso8601String(),
       'updated_at': DateTime.now().toIso8601String(),
     });
     batch.insert('users', {
       'id': 'user-student-001',
-      'email': 'student@dorm.edu',
+      'email': 'student',
       'password_hash': _hashPassword('student123'),
       'role': 'STUDENT',
       'linked_student_id': studentId,
@@ -183,8 +183,8 @@ class DatabaseService {
     final dormId = uuid.v4();
     batch.insert('dormitories', {
       'id': dormId,
-      'name': 'North Hall',
-      'address': '123 Campus Drive',
+      'name': 'Shimoliy yotoqxona',
+      'address': '123 Universitet ko\'chasi',
       'created_at': DateTime.now().toIso8601String(),
     });
 

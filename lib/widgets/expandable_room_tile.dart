@@ -27,13 +27,13 @@ class _ExpandableRoomTileState extends State<ExpandableRoomTile> {
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: Text(isEditing ? 'Edit Bed Space' : 'Add Bed Space'),
+          title: Text(isEditing ? 'Joyni tahrirlash' : 'Joy qo\'shish'),
           content: TextField(
             controller: numberController,
-            decoration: const InputDecoration(labelText: 'Bed Space Number (e.g. A, B, 1, 2)'),
+            decoration: const InputDecoration(labelText: 'Joy raqami (masalan, A, B, 1, 2)'),
           ),
           actions: [
-            TextButton(onPressed: () => Navigator.of(context).pop(), child: const Text('Cancel')),
+            TextButton(onPressed: () => Navigator.of(context).pop(), child: const Text('Bekor qilish')),
             ElevatedButton(
               onPressed: () async {
                 final number = numberController.text.trim();
@@ -52,7 +52,7 @@ class _ExpandableRoomTileState extends State<ExpandableRoomTile> {
                   }
                 }
               },
-              child: const Text('Save'),
+              child: const Text('Saqlash'),
             ),
           ],
         );
@@ -67,8 +67,8 @@ class _ExpandableRoomTileState extends State<ExpandableRoomTile> {
       child: Column(
         children: [
           ListTile(
-            title: Text('Room ${widget.room.number}'),
-            subtitle: Text('Capacity: ${widget.room.capacity} | ${widget.room.gender?.name ?? 'N/A'}'),
+            title: Text('Xona ${widget.room.number}'),
+            subtitle: Text('Sig\'imi: ${widget.room.capacity} | ${widget.room.gender?.name ?? 'N/A'}'),
             trailing: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
@@ -97,7 +97,7 @@ class _ExpandableRoomTileState extends State<ExpandableRoomTile> {
                     child: ElevatedButton.icon(
                       onPressed: () => _showBedSpaceDialog(roomId: widget.room.id),
                       icon: const Icon(Icons.add),
-                      label: const Text('Add Bed Space'),
+                      label: const Text('Joy qo\'shish'),
                     ),
                   ),
                   FutureBuilder<List<BedSpace>>(
@@ -107,7 +107,7 @@ class _ExpandableRoomTileState extends State<ExpandableRoomTile> {
                         return const Center(child: CircularProgressIndicator());
                       }
                       if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                        return const Center(child: Text('No bed spaces found.'));
+                        return const Center(child: Text('Joylar topilmadi.'));
                       }
                       final bedSpaces = snapshot.data!;
                       return ListView.builder(
@@ -117,7 +117,7 @@ class _ExpandableRoomTileState extends State<ExpandableRoomTile> {
                         itemBuilder: (context, index) {
                           final bedSpace = bedSpaces[index];
                           return ListTile(
-                            title: Text('Bed Space ${bedSpace.spaceNumber}'),
+                            title: Text('Joy ${bedSpace.spaceNumber}'),
                             trailing: Row(
                               mainAxisSize: MainAxisSize.min,
                               children: [

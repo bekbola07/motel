@@ -35,22 +35,22 @@ class _UserListState extends State<UserList> {
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: Text('Edit ${user.email}'),
+          title: Text('${user.email}ni tahrirlash'),
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               TextField(
                 controller: emailController,
-                decoration: const InputDecoration(labelText: 'Email'),
+                decoration: const InputDecoration(labelText: 'Elektron pochta'),
               ),
               TextField(
                 controller: passwordController,
-                decoration: const InputDecoration(labelText: 'New Password (optional)'),
+                decoration: const InputDecoration(labelText: 'Yangi parol (ixtiyoriy)'),
               ),
             ],
           ),
           actions: [
-            TextButton(onPressed: () => Navigator.of(context).pop(), child: const Text('Cancel')),
+            TextButton(onPressed: () => Navigator.of(context).pop(), child: const Text('Bekor qilish')),
             ElevatedButton(
               onPressed: () async {
                 final newEmail = emailController.text.trim();
@@ -69,7 +69,7 @@ class _UserListState extends State<UserList> {
                   // Handle error
                 }
               },
-              child: const Text('Save'),
+              child: const Text('Saqlash'),
             ),
           ],
         );
@@ -86,10 +86,10 @@ class _UserListState extends State<UserList> {
           return const Center(child: CircularProgressIndicator());
         }
         if (snapshot.hasError) {
-          return Center(child: Text('Error: ${snapshot.error.toString()}'));
+          return Center(child: Text('Xatolik: ${snapshot.error.toString()}'));
         }
         if (!snapshot.hasData || snapshot.data!.isEmpty) {
-          return const Center(child: Text('No users found.'));
+          return const Center(child: Text('Foydalanuvchilar topilmadi.'));
         }
 
         final users = snapshot.data!;

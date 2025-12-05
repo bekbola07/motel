@@ -47,7 +47,7 @@ class _RoomsScreenState extends State<RoomsScreen> {
         return StatefulBuilder(
           builder: (context, setStateInDialog) {
             return AlertDialog(
-              title: const Text('Add New Room'),
+              title: const Text('Yangi xona qo\'shish'),
               content: SingleChildScrollView(
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
@@ -62,15 +62,15 @@ class _RoomsScreenState extends State<RoomsScreen> {
                           selectedDorm = value;
                         });
                       },
-                      decoration: const InputDecoration(labelText: 'Select Dormitory'),
+                      decoration: const InputDecoration(labelText: 'Yotoqxonani tanlang'),
                     ),
                     TextField(
                       controller: numberController,
-                      decoration: const InputDecoration(labelText: 'Room Number'),
+                      decoration: const InputDecoration(labelText: 'Xona raqami'),
                     ),
                     TextField(
                       controller: capacityController,
-                      decoration: const InputDecoration(labelText: 'Capacity'),
+                      decoration: const InputDecoration(labelText: 'Sig\'imi'),
                       keyboardType: TextInputType.number,
                     ),
                     DropdownButtonFormField<RoomGender>(
@@ -83,17 +83,17 @@ class _RoomsScreenState extends State<RoomsScreen> {
                           selectedGender = value;
                         });
                       },
-                      decoration: const InputDecoration(labelText: 'Gender'),
+                      decoration: const InputDecoration(labelText: 'Jinsi'),
                     ),
                     TextField(
                       controller: featuresController,
-                      decoration: const InputDecoration(labelText: 'Features (e.g. AC, WiFi)'),
+                      decoration: const InputDecoration(labelText: 'Qulayliklar (masalan, Konditsioner, WiFi)'),
                     ),
                   ],
                 ),
               ),
               actions: [
-                TextButton(onPressed: () => Navigator.of(context).pop(), child: const Text('Cancel')),
+                TextButton(onPressed: () => Navigator.of(context).pop(), child: const Text('Bekor qilish')),
                 ElevatedButton(
                   onPressed: () async {
                     final number = numberController.text.trim();
@@ -110,7 +110,7 @@ class _RoomsScreenState extends State<RoomsScreen> {
                       }
                     }
                   },
-                  child: const Text('Create'),
+                  child: const Text('Yaratish'),
                 ),
               ],
             );
@@ -132,10 +132,10 @@ class _RoomsScreenState extends State<RoomsScreen> {
               return const Center(child: CircularProgressIndicator());
             }
             if (snapshot.hasError) {
-              return Center(child: Text('Error: ${snapshot.error}'));
+              return Center(child: Text('Xatolik: ${snapshot.error}'));
             }
             if (!snapshot.hasData || snapshot.data!.isEmpty) {
-              return const Center(child: Text('No rooms found. Add one to get started.'));
+              return const Center(child: Text('Xonalar topilmadi. Boshlash uchun yangi xona qo\'shing.'));
             }
 
             final rooms = snapshot.data!;
@@ -151,7 +151,7 @@ class _RoomsScreenState extends State<RoomsScreen> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: _showAddRoomDialog,
-        tooltip: 'Add Room',
+        tooltip: 'Xona qo\'shish',
         child: const Icon(Icons.add),
       ),
     );

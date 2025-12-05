@@ -42,17 +42,17 @@ class _RoomManagementScreenState extends State<RoomManagementScreen> {
         return StatefulBuilder(
           builder: (context, setStateInDialog) {
             return AlertDialog(
-              title: Text(isEditing ? 'Edit Room' : 'Add Room'),
+              title: Text(isEditing ? 'Xonani tahrirlash' : 'Xona qo\'shish'),
               content: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   TextField(
                     controller: numberController,
-                    decoration: const InputDecoration(labelText: 'Room Number'),
+                    decoration: const InputDecoration(labelText: 'Xona raqami'),
                   ),
                   TextField(
                     controller: capacityController,
-                    decoration: const InputDecoration(labelText: 'Capacity'),
+                    decoration: const InputDecoration(labelText: 'Sig\'imi'),
                     keyboardType: TextInputType.number,
                     enabled: !isEditing, // Don't allow editing capacity
                   ),
@@ -66,16 +66,16 @@ class _RoomManagementScreenState extends State<RoomManagementScreen> {
                         selectedGender = value;
                       });
                     },
-                    decoration: const InputDecoration(labelText: 'Gender'),
+                    decoration: const InputDecoration(labelText: 'Jinsi'),
                   ),
                   TextField(
                     controller: featuresController,
-                    decoration: const InputDecoration(labelText: 'Features (e.g. AC, WiFi)'),
+                    decoration: const InputDecoration(labelText: 'Qulayliklar (masalan, Konditsioner, WiFi)'),
                   ),
                 ],
               ),
               actions: [
-                TextButton(onPressed: () => Navigator.of(context).pop(), child: const Text('Cancel')),
+                TextButton(onPressed: () => Navigator.of(context).pop(), child: const Text('Bekor qilish')),
                 ElevatedButton(
                   onPressed: () async {
                     final number = numberController.text.trim();
@@ -97,11 +97,11 @@ class _RoomManagementScreenState extends State<RoomManagementScreen> {
                         _refreshRooms();
                         Navigator.of(context).pop();
                       } catch (e) {
-                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Error: $e')));
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Xatolik: $e')));
                       }
                     }
                   },
-                  child: const Text('Save'),
+                  child: const Text('Saqlash'),
                 ),
               ],
             );
@@ -115,7 +115,7 @@ class _RoomManagementScreenState extends State<RoomManagementScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Rooms in ${widget.dormitory.name}'),
+        title: Text('`${widget.dormitory.name}`dagi xonalar'),
       ),
       body: FutureBuilder<List<Room>>(
         future: _roomsFuture,
@@ -124,10 +124,10 @@ class _RoomManagementScreenState extends State<RoomManagementScreen> {
             return const Center(child: CircularProgressIndicator());
           }
           if (snapshot.hasError) {
-            return Center(child: Text('Error: ${snapshot.error}'));
+            return Center(child: Text('Xatolik: ${snapshot.error}'));
           }
           if (!snapshot.hasData || snapshot.data!.isEmpty) {
-            return const Center(child: Text('No rooms found. Add one to get started.'));
+            return const Center(child: Text('Xonalar topilmadi. Boshlash uchun yangi xona qo\'shing.'));
           }
 
           final rooms = snapshot.data!;
@@ -136,8 +136,8 @@ class _RoomManagementScreenState extends State<RoomManagementScreen> {
             itemBuilder: (context, index) {
               final room = rooms[index];
               return ListTile(
-                title: Text('Room ${room.number}'),
-                subtitle: Text('Capacity: ${room.capacity} | ${room.gender?.name ?? 'N/A'}'),
+                title: Text('Xona ${room.number}'),
+                subtitle: Text('Sig\'imi: ${room.capacity} | ${room.gender?.name ?? 'N/A'}'),
                 trailing: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
@@ -161,7 +161,7 @@ class _RoomManagementScreenState extends State<RoomManagementScreen> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => _showRoomDialog(),
-        tooltip: 'Add Room',
+        tooltip: 'Xona qo\'shish',
         child: const Icon(Icons.add),
       ),
     );

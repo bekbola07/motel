@@ -36,22 +36,22 @@ class _DormitoryCrudScreenState extends State<DormitoryCrudScreen> {
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: Text(isEditing ? 'Edit Dormitory' : 'Add Dormitory'),
+          title: Text(isEditing ? 'Yotoqxonani tahrirlash' : 'Yotoqxona qo\'shish'),
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               TextField(
                 controller: nameController,
-                decoration: const InputDecoration(labelText: 'Name'),
+                decoration: const InputDecoration(labelText: 'Nomi'),
               ),
               TextField(
                 controller: addressController,
-                decoration: const InputDecoration(labelText: 'Address'),
+                decoration: const InputDecoration(labelText: 'Manzil'),
               ),
             ],
           ),
           actions: [
-            TextButton(onPressed: () => Navigator.of(context).pop(), child: const Text('Cancel')),
+            TextButton(onPressed: () => Navigator.of(context).pop(), child: const Text('Bekor qilish')),
             ElevatedButton(
               onPressed: () async {
                 final name = nameController.text.trim();
@@ -72,7 +72,7 @@ class _DormitoryCrudScreenState extends State<DormitoryCrudScreen> {
                   }
                 }
               },
-              child: const Text('Save'),
+              child: const Text('Saqlash'),
             ),
           ],
         );
@@ -90,7 +90,7 @@ class _DormitoryCrudScreenState extends State<DormitoryCrudScreen> {
             return const Center(child: CircularProgressIndicator());
           }
           if (snapshot.hasError || !snapshot.hasData || snapshot.data!.isEmpty) {
-            return const Center(child: Text('No dormitories found.'));
+            return const Center(child: Text('Yotoqxonalar topilmadi.'));
           }
 
           final dormitories = snapshot.data!;

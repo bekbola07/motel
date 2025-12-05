@@ -93,7 +93,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
     if (userResult['success']) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          content: Text('Registration successful! Please login.'),
+          content: Text('Muvaffaqiyatli ro\'yxatdan o\'tdingiz! Iltimos, tizimga kiring.'),
           backgroundColor: Colors.green,
         ),
       );
@@ -112,7 +112,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Register'),
+        title: const Text('Ro\'yxatdan o\'tish'),
       ),
       body: SafeArea(
         child: SingleChildScrollView(
@@ -123,7 +123,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 const Text(
-                  'Create Student Account',
+                  'Talaba hisobini yaratish',
                   style: TextStyle(
                     fontSize: 24,
                     fontWeight: FontWeight.bold,
@@ -133,12 +133,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 TextFormField(
                   controller: _fullNameController,
                   decoration: const InputDecoration(
-                    labelText: 'Full Name',
+                    labelText: 'To\'liq ism',
                     prefixIcon: Icon(Icons.person),
                   ),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return 'Please enter your full name';
+                      return 'Iltimos, to\'liq ismingizni kiriting';
                     }
                     return null;
                   },
@@ -147,12 +147,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 TextFormField(
                   controller: _studentIdController,
                   decoration: const InputDecoration(
-                    labelText: 'Student ID',
+                    labelText: 'Talaba ID raqami',
                     prefixIcon: Icon(Icons.badge),
                   ),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return 'Please enter your student ID';
+                      return 'Iltimos, talaba ID raqamingizni kiriting';
                     }
                     return null;
                   },
@@ -161,12 +161,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 TextFormField(
                   controller: _facultyController,
                   decoration: const InputDecoration(
-                    labelText: 'Faculty',
+                    labelText: 'Fakultet',
                     prefixIcon: Icon(Icons.business),
                   ),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return 'Please enter your faculty';
+                      return 'Iltimos, fakultetingizni kiriting';
                     }
                     return null;
                   },
@@ -175,12 +175,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 TextFormField(
                   controller: _courseController,
                   decoration: const InputDecoration(
-                    labelText: 'Course/Year',
+                    labelText: 'Kurs/Yil',
                     prefixIcon: Icon(Icons.school),
                   ),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return 'Please enter your course/year';
+                      return 'Iltimos, kursingizni/yilingizni kiriting';
                     }
                     return null;
                   },
@@ -190,7 +190,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   controller: _phoneController,
                   keyboardType: TextInputType.phone,
                   decoration: const InputDecoration(
-                    labelText: 'Phone (Optional)',
+                    labelText: 'Telefon (ixtiyoriy)',
                     prefixIcon: Icon(Icons.phone),
                   ),
                 ),
@@ -199,15 +199,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   controller: _emailController,
                   keyboardType: TextInputType.emailAddress,
                   decoration: const InputDecoration(
-                    labelText: 'Email',
+                    labelText: 'Elektron pochta',
                     prefixIcon: Icon(Icons.email),
                   ),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return 'Please enter your email';
+                      return 'Iltimos, elektron pochtangizni kiriting';
                     }
                     if (!value.contains('@')) {
-                      return 'Please enter a valid email';
+                      return 'Iltimos, to\'g\'ri elektron pochta kiriting';
                     }
                     return null;
                   },
@@ -217,7 +217,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   controller: _passwordController,
                   obscureText: _obscurePassword,
                   decoration: InputDecoration(
-                    labelText: 'Password',
+                    labelText: 'Parol',
                     prefixIcon: const Icon(Icons.lock),
                     suffixIcon: IconButton(
                       icon: Icon(
@@ -230,10 +230,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   ),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return 'Please enter a password';
+                      return 'Iltimos, parol kiriting';
                     }
                     if (value.length < 6) {
-                      return 'Password must be at least 6 characters';
+                      return 'Parol kamida 6 belgidan iborat bo\'lishi kerak';
                     }
                     return null;
                   },
@@ -243,7 +243,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   controller: _confirmPasswordController,
                   obscureText: _obscureConfirmPassword,
                   decoration: InputDecoration(
-                    labelText: 'Confirm Password',
+                    labelText: 'Parolni tasdiqlang',
                     prefixIcon: const Icon(Icons.lock_outline),
                     suffixIcon: IconButton(
                       icon: Icon(
@@ -256,10 +256,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   ),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return 'Please confirm your password';
+                      return 'Iltimos, parolni tasdiqlang';
                     }
                     if (value != _passwordController.text) {
-                      return 'Passwords do not match';
+                      return 'Parollar mos kelmadi';
                     }
                     return null;
                   },
@@ -277,7 +277,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     child: CircularProgressIndicator(strokeWidth: 2),
                   )
                       : const Text(
-                    'Register',
+                    'Ro\'yxatdan o\'tish',
                     style: TextStyle(fontSize: 16),
                   ),
                 ),

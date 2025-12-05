@@ -20,17 +20,17 @@ class AppDrawer extends StatelessWidget {
           drawerItems.addAll([
             ListTile(
               leading: const Icon(Icons.people),
-              title: const Text('Users'),
+              title: const Text('Foydalanuvchilar'),
               onTap: () => onItemTapped(0),
             ),
             ListTile(
               leading: const Icon(Icons.business),
-              title: const Text('Dormitory Management'),
+              title: const Text('Yotoqxonalarni boshqarish'),
               onTap: () => onItemTapped(1),
             ),
             ListTile(
               leading: const Icon(Icons.king_bed),
-              title: const Text('Rooms'),
+              title: const Text('Xonalar'),
               onTap: () => onItemTapped(2),
             ),
           ]);
@@ -39,17 +39,17 @@ class AppDrawer extends StatelessWidget {
           drawerItems.addAll([
             ListTile(
               leading: const Icon(Icons.pending_actions),
-              title: const Text('Pending Requests'),
+              title: const Text('Kutilayotgan so\'rovlar'),
               onTap: () => onItemTapped(0),
             ),
             ListTile(
               leading: const Icon(Icons.check_circle),
-              title: const Text('Active Assignments'),
+              title: const Text('Faol biriktirishlar'),
               onTap: () => onItemTapped(1),
             ),
             ListTile(
               leading: const Icon(Icons.business),
-              title: const Text('Dormitory Management'),
+              title: const Text('Yotoqxonalarni boshqarish'),
               onTap: () => onItemTapped(2),
             ),
           ]);
@@ -58,7 +58,7 @@ class AppDrawer extends StatelessWidget {
           drawerItems.add(
             ListTile(
               leading: const Icon(Icons.dashboard),
-              title: const Text('My Dashboard'),
+              title: const Text('Mening boshqaruv panelim'),
               onTap: () => onItemTapped(0),
             ),
           );
@@ -71,12 +71,12 @@ class AppDrawer extends StatelessWidget {
         padding: EdgeInsets.zero,
         children: <Widget>[
           UserAccountsDrawerHeader(
-            accountName: Text(currentUser?.role.name ?? 'User'),
-            accountEmail: Text(currentUser?.email ?? 'No email'),
+            accountName: Text(currentUser?.role.name ?? 'Foydalanuvchi'),
+            accountEmail: Text(currentUser?.email ?? 'Email yo\'q'),
             currentAccountPicture: CircleAvatar(
               backgroundColor: Colors.white,
               child: Text(
-                currentUser?.email.substring(0, 1).toUpperCase() ?? 'U',
+                currentUser?.email.substring(0, 1).toUpperCase() ?? 'F',
                 style: const TextStyle(fontSize: 40.0),
               ),
             ),
@@ -85,7 +85,7 @@ class AppDrawer extends StatelessWidget {
           const Divider(),
           ListTile(
             leading: const Icon(Icons.logout),
-            title: const Text('Logout'),
+            title: const Text('Chiqish'),
             onTap: () {
               AuthService.instance.logout();
               Navigator.of(context).pushReplacementNamed('/login');

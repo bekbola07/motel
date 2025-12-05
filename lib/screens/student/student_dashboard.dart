@@ -52,12 +52,12 @@ class _StudentDashboardState extends State<StudentDashboard> {
           result['note'],
         );
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Request submitted!'), backgroundColor: Colors.green),
+          const SnackBar(content: Text('So\'rov yuborildi!'), backgroundColor: Colors.green),
         );
         _refreshData(); // Refresh the list of requests
       } catch (e) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Failed to submit request: ${e.toString()}'), backgroundColor: Colors.red),
+          SnackBar(content: Text('So\'rovni yuborishda xatolik: ${e.toString()}'), backgroundColor: Colors.red),
         );
       }
     }
@@ -71,24 +71,24 @@ class _StudentDashboardState extends State<StudentDashboard> {
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: const Text('Create Room Request'),
+          title: const Text('Xona uchun so\'rov yaratish'),
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               TextField(
                 controller: capacityController,
                 keyboardType: TextInputType.number,
-                decoration: const InputDecoration(labelText: 'Preferred Capacity'),
+                decoration: const InputDecoration(labelText: 'Ma\'qul sig\'im'),
               ),
               const SizedBox(height: 16),
               TextField(
                 controller: noteController,
-                decoration: const InputDecoration(labelText: 'Notes (optional)'),
+                decoration: const InputDecoration(labelText: 'Izohlar (ixtiyoriy)'),
               ),
             ],
           ),
           actions: [
-            TextButton(onPressed: () => Navigator.of(context).pop(), child: const Text('Cancel')),
+            TextButton(onPressed: () => Navigator.of(context).pop(), child: const Text('Bekor qilish')),
             ElevatedButton(
               onPressed: () {
                 Navigator.of(context).pop({
@@ -96,7 +96,7 @@ class _StudentDashboardState extends State<StudentDashboard> {
                   'note': noteController.text.trim(),
                 });
               },
-              child: const Text('Submit'),
+              child: const Text('Yuborish'),
             ),
           ],
         );
@@ -108,7 +108,7 @@ class _StudentDashboardState extends State<StudentDashboard> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('My Dashboard'),
+        title: const Text('Mening boshqaruv panelim'),
       ),
       drawer: AppDrawer(onItemTapped: _onItemTapped),
       body: RefreshIndicator(
@@ -129,7 +129,7 @@ class _StudentDashboardState extends State<StudentDashboard> {
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: _createRequest,
-        label: const Text('New Request'),
+        label: const Text('Yangi so\'rov'),
         icon: const Icon(Icons.add),
       ),
     );
@@ -143,7 +143,7 @@ class _StudentDashboardState extends State<StudentDashboard> {
           return const Center(child: CircularProgressIndicator());
         }
         if (snapshot.hasError || !snapshot.hasData || snapshot.data == null) {
-          return const Text('Could not load profile.');
+          return const Text('Profilni yuklab bo\`lmadi.');
         }
         final profile = snapshot.data!;
         return Card(
@@ -153,15 +153,15 @@ class _StudentDashboardState extends State<StudentDashboard> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                Text('My Profile', style: Theme.of(context).textTheme.titleLarge),
+                Text('Mening profilim', style: Theme.of(context).textTheme.titleLarge),
                 const Divider(),
-                Text('Name: ${profile.fullName}', style: Theme.of(context).textTheme.bodyMedium),
+                Text('Ism: ${profile.fullName}', style: Theme.of(context).textTheme.bodyMedium),
                 const SizedBox(height: 4),
-                Text('Student ID: ${profile.studentId}', style: Theme.of(context).textTheme.bodyMedium),
+                Text('Talaba ID: ${profile.studentId}', style: Theme.of(context).textTheme.bodyMedium),
                 const SizedBox(height: 4),
-                Text('Email: ${profile.email}', style: Theme.of(context).textTheme.bodyMedium),
+                Text('Elektron pochta: ${profile.email}', style: Theme.of(context).textTheme.bodyMedium),
                 const SizedBox(height: 4),
-                Text('Faculty: ${profile.faculty}', style: Theme.of(context).textTheme.bodyMedium),
+                Text('Fakultet: ${profile.faculty}', style: Theme.of(context).textTheme.bodyMedium),
               ],
             ),
           ),
@@ -178,7 +178,7 @@ class _StudentDashboardState extends State<StudentDashboard> {
           return const Center(child: CircularProgressIndicator());
         }
         if (snapshot.hasError) {
-          return const Text('Could not load assignment.');
+          return const Text('Biriktirishni yuklab bo\`lmadi.');
         }
 
         final assignment = snapshot.data;
@@ -189,12 +189,12 @@ class _StudentDashboardState extends State<StudentDashboard> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                Text('Assignment Status', style: Theme.of(context).textTheme.titleLarge),
+                Text('Biriktirish holati', style: Theme.of(context).textTheme.titleLarge),
                 const Divider(),
                 if (assignment != null)
-                  Text('You are assigned to Bed Space: ${assignment.bedSpaceId}', style: Theme.of(context).textTheme.bodyMedium)
+                  Text('Sizga ajratilgan joy: ${assignment.bedSpaceId}', style: Theme.of(context).textTheme.bodyMedium)
                 else
-                  Text('You do not have an active assignment.', style: Theme.of(context).textTheme.bodyMedium),
+                  Text('Sizda faol biriktirish mavjud emas.', style: Theme.of(context).textTheme.bodyMedium),
               ],
             ),
           ),
@@ -207,7 +207,7 @@ class _StudentDashboardState extends State<StudentDashboard> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('My Requests', style: Theme.of(context).textTheme.titleLarge),
+        Text('Mening so\'rovlarim', style: Theme.of(context).textTheme.titleLarge),
         const SizedBox(height: 8),
         FutureBuilder<List<Request>>(
           future: _requestsFuture,
@@ -216,12 +216,12 @@ class _StudentDashboardState extends State<StudentDashboard> {
               return const Center(child: CircularProgressIndicator());
             }
             if (snapshot.hasError) {
-              return Center(child: Text('Error: ${snapshot.error}'));
+              return Center(child: Text('Xatolik: ${snapshot.error}'));
             }
             if (!snapshot.hasData || snapshot.data!.isEmpty) {
               return const Center(child: Padding(
                 padding: EdgeInsets.all(16.0),
-                child: Text('You have no requests. Tap the + button to create one.'),
+                child: Text('Sizda so\'rovlar yo\'q. Yaratish uchun + tugmasini bosing.'),
               ));
             }
 
@@ -236,8 +236,8 @@ class _StudentDashboardState extends State<StudentDashboard> {
                   elevation: 2,
                   margin: const EdgeInsets.symmetric(vertical: 4),
                   child: ListTile(
-                    title: Text('Request from ${request.createdAt.toLocal().toString().substring(0, 10)}'),
-                    subtitle: Text('Note: ${request.note ?? 'N/A'}'),
+                    title: Text('${request.createdAt.toLocal().toString().substring(0, 10)} sanadagi so\'rov'),
+                    subtitle: Text('Izoh: ${request.note ?? 'N/A'}'),
                     trailing: Chip(
                       label: Text(request.status.name),
                       backgroundColor: _getStatusColor(request.status),

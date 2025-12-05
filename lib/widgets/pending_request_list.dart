@@ -15,7 +15,7 @@ class PendingRequestList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (requests.isEmpty) {
-      return const Center(child: Text('No pending requests.'));
+      return const Center(child: Text('Kutilayotgan so\'rovlar yo\'q.'));
     }
 
     return ListView.builder(
@@ -25,11 +25,11 @@ class PendingRequestList extends StatelessWidget {
         return Card(
           margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
           child: ListTile(
-            title: Text('Student ID: ${request.studentId}'),
-            subtitle: Text('Wants room with capacity: ${request.preferredCapacity}\nNote: ${request.note}'),
+            title: Text('Talaba IDsi: ${request.studentId}'),
+            subtitle: Text('Xonaning sig\'imi: ${request.preferredCapacity}\nIzoh: ${request.note}'),
             trailing: ElevatedButton(
               onPressed: () => onApprove(request),
-              child: const Text('Approve'),
+              child: const Text('Tasdiqlash'),
             ),
           ),
         );

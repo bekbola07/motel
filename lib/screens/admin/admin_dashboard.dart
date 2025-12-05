@@ -22,9 +22,9 @@ class _AdminDashboardState extends State<AdminDashboard> {
   ];
 
   static const List<String> _titles = <String>[
-    'User Management',
-    'Dormitory Management',
-    'Room & Bed Space Management',
+    'Foydalanuvchilarni boshqarish',
+    'Yotoqxonalarni boshqarish',
+    'Xonalar va joylarni boshqarish',
   ];
 
   void _onItemTapped(int index) {

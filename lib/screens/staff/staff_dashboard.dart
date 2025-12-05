@@ -49,10 +49,10 @@ class _StaffDashboardState extends State<StaffDashboard> {
           return const Center(child: CircularProgressIndicator());
         }
         if (snapshot.hasError) {
-          return Center(child: Text('Error: ${snapshot.error}'));
+          return Center(child: Text('Xatolik: ${snapshot.error}'));
         }
         if (!snapshot.hasData || snapshot.data!.isEmpty) {
-          return const Center(child: Text('No pending requests.'));
+          return const Center(child: Text('Kutilayotgan so\'rovlar yo\'q.'));
         }
         return PendingRequestList(requests: snapshot.data!, onApprove: _approveRequest);
       },
@@ -67,10 +67,10 @@ class _StaffDashboardState extends State<StaffDashboard> {
           return const Center(child: CircularProgressIndicator());
         }
         if (snapshot.hasError) {
-          return Center(child: Text('Error: ${snapshot.error}'));
+          return Center(child: Text('Xatolik: ${snapshot.error}'));
         }
         if (!snapshot.hasData || snapshot.data!.isEmpty) {
-          return const Center(child: Text('No active assignments.'));
+          return const Center(child: Text('Faol biriktirishlar yo\'q.'));
         }
         return ActiveAssignmentList(assignments: snapshot.data!);
       },
@@ -81,33 +81,33 @@ class _StaffDashboardState extends State<StaffDashboard> {
     final dorms = await _dormitoryService.getDormitories();
     if (!mounted || dorms.isEmpty) return;
 
-    final selectedDorm = await _showSelectDialog<Dormitory>(context, 'Select Dormitory', dorms, (d) => d.name);
+    final selectedDorm = await _showSelectDialog<Dormitory>(context, 'Yotoqxonani tanlang', dorms, (d) => d.name);
     if (selectedDorm == null) return;
 
     final rooms = await _roomService.getRooms(selectedDorm.id);
     if (!mounted || rooms.isEmpty) return;
 
-    final selectedRoom = await _showSelectDialog<Room>(context, 'Select Room', rooms, (r) => r.number);
+    final selectedRoom = await _showSelectDialog<Room>(context, 'Xonani tanlang', rooms, (r) => r.number);
     if (selectedRoom == null) return;
 
     final bedSpaces = await _staffService.getAvailableBedSpaces(selectedRoom.id);
     if (!mounted || bedSpaces.isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('No available bed spaces in this room.')));
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Bu xonada bo\'sh joylar yo\'q.')));
       return;
     }
 
-    final selectedBedSpace = await _showSelectDialog<BedSpace>(context, 'Select Bed Space', bedSpaces, (bs) => bs.spaceNumber);
+    final selectedBedSpace = await _showSelectDialog<BedSpace>(context, 'Joyni tanlang', bedSpaces, (bs) => bs.spaceNumber);
     if (selectedBedSpace == null) return;
 
     try {
       await _staffService.approveRequest(request, selectedBedSpace.id);
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Request approved!'), backgroundColor: Colors.green),
+        const SnackBar(content: Text('So\'rov tasdiqlandi!'), backgroundColor: Colors.green),
       );
       setState(() {}); // Re-build to refresh the lists
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Failed to approve: ${e.toString()}'), backgroundColor: Colors.red),
+        SnackBar(content: Text('Tasdiqlashda xatolik: ${e.toString()}'), backgroundColor: Colors.red),
       );
     }
   }
@@ -139,7 +139,7 @@ class _StaffDashboardState extends State<StaffDashboard> {
 
   @override
   Widget build(BuildContext context) {
-    final titles = ['Pending Requests', 'Active Assignments', 'Dormitory Management'];
+    final titles = ['Kutilayotgan so\'rovlar', 'Faol biriktirishlar', 'Yotoqxonalarni boshqarish'];
 
     return Scaffold(
       appBar: AppBar(

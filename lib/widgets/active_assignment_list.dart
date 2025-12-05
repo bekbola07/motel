@@ -10,7 +10,7 @@ class ActiveAssignmentList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (assignments.isEmpty) {
-      return const Center(child: Text('No active assignments.'));
+      return const Center(child: Text('Faol biriktirishlar yo\'q.'));
     }
 
     return ListView.builder(
@@ -20,10 +20,10 @@ class ActiveAssignmentList extends StatelessWidget {
         return Card(
           margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
           child: ListTile(
-            title: Text('Student ID: ${assignment.studentId}'),
-            subtitle: Text('Bed Space ID: ${assignment.bedSpaceId}'),
+            title: Text('Talaba IDsi: ${assignment.studentId}'),
+            subtitle: Text('Joy IDsi: ${assignment.bedSpaceId}'),
             trailing: const Chip(
-              label: Text('ACTIVE'),
+              label: Text('FAOL'),
               backgroundColor: Colors.green,
               labelStyle: TextStyle(color: Colors.white),
             ),
